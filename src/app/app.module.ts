@@ -4,40 +4,43 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { ProductComponent } from './product/product.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-import { SearchComponent } from './search/search.component';
-import { CarouselComponent } from './carousel/carousel.component';
-import { StarsComponent } from './stars/stars.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { HomeComponent } from './home/home.component';
 import {Routes, RouterModule} from '@angular/router';
+import { Product1Component } from './product1/product1.component';
+import {ProductService} from './shared/product.service';
+import { Product2Component } from './product2/product2.component';
+import {LoggerService} from './shared/logger.service';
+import {AnotherProductService} from './shared/product2.service';
 
-const routeConfig: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'product/:prodTitle', component: ProductDetailComponent}
-]
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductComponent,
-    NavbarComponent,
-    FooterComponent,
-    SearchComponent,
-    CarouselComponent,
-    StarsComponent,
-    ProductDetailComponent,
-    HomeComponent
+    Product1Component,
+    Product2Component
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    RouterModule.forRoot(routeConfig)
+    HttpModule
   ],
-  providers: [],
+  providers: [{
+      provide: ProductService,
+      useFactory: (logger: LoggerService, appConfig) => {
+          // const logger = new LoggerService();
+          // const dev = Math.random() > 0.5;
+          if (appConfig.isDev) {
+              return new ProductService(logger);
+          }else {
+              return new AnotherProductService(logger);
+          }
+      },
+      deps: [LoggerService, 'APP_CONFIG']
+  },
+      // ProductService
+      LoggerService, {
+        // provide: 'ID_DEV_ENV', useValue: false
+        provide: 'APP_CONFIG', useValue: { isDev: false }
+      }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
