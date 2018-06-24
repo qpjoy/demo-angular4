@@ -12,15 +12,16 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { StarsComponent } from './stars/stars.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { HomeComponent } from './home/home.component';
-import {Routes, RouterModule} from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { BindComponent } from './bind/bind.component';
 import { MultiplePipe } from './pipe/multiple.pipe';
 import { FilterPipe } from './pipe/filter.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductService } from './shared/product.service';
 
 const routeConfig: Routes = [
     {path: '', component: HomeComponent},
-    {path: 'product/:prodTitle', component: ProductDetailComponent}
+    {path: 'product/:productId', component: ProductDetailComponent}
 ]
 
 @NgModule({
@@ -45,7 +46,7 @@ const routeConfig: Routes = [
     RouterModule.forRoot(routeConfig),
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
