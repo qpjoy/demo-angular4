@@ -13,6 +13,10 @@ import { StarsComponent } from './stars/stars.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { HomeComponent } from './home/home.component';
 import {Routes, RouterModule} from '@angular/router';
+import { BindComponent } from './bind/bind.component';
+import { MultiplePipe } from './pipe/multiple.pipe';
+import { FilterPipe } from './pipe/filter.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routeConfig: Routes = [
     {path: '', component: HomeComponent},
@@ -29,13 +33,17 @@ const routeConfig: Routes = [
     CarouselComponent,
     StarsComponent,
     ProductDetailComponent,
-    HomeComponent
+    HomeComponent,
+    BindComponent,
+    MultiplePipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(routeConfig)
+    RouterModule.forRoot(routeConfig),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

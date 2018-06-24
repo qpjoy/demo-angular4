@@ -1,0 +1,18 @@
+<p>
+  bind works!
+</p>
+
+<button (click)="doOnClick($event)">点我</button>
+<button [disabled]="false">点我(dom属性绑定)</button>
+
+<img [src]="imgUrl">
+<img src="http://placehold.it/400x220">
+
+<input value="Tom" (input)="doOnInput($event)">
+
+<p>试试自己的管道{{size | multiple:2}}</p>
+
+
+<table>
+  <tr><td [attr.colspan]="colspan">幕布(html属性绑定)</td></tr>
+</table>
